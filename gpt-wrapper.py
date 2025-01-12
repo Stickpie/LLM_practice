@@ -11,8 +11,19 @@ def generate_text(prompt):
     completion = client.chat.completions.create(
         model="gpt-4o",
         messages=[
-            {"role": "user", "content": "write a haiku about ai"}
+            {"role": "user", "content": prompt}
         ]
     )
 
-    print(completion.choices[0].message.content)
+    return completion.choices[0].message.content
+    
+
+response = client.images.generate(
+    model="dall-e-3",
+    prompt="a white siamese cat",
+    size="1024x1024",
+    quality="standard",
+    n=1,
+)
+
+print(response.data[0].url)
