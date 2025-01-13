@@ -2,6 +2,7 @@
 
 from openai import OpenAI
 import streamlit as st
+import requests
 
 
 api_key = st.secrets["api_key"]
@@ -20,10 +21,14 @@ def generate_text(prompt):
 
 response = client.images.generate(
     model="dall-e-3",
-    prompt="a white siamese cat",
+    prompt=prompt,
     size="1024x1024",
     quality="standard",
     n=1,
 )
 
-print(response.data[0].url)
+image_url = response.data[0].url
+image_response = requests.get(image_url)
+
+with open("cat.png", 'wb') as file:
+    file.write(image_response.content)
