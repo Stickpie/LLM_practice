@@ -2,6 +2,8 @@ from openai import OpenAI
 import streamlit as st
 import requests
 
+'''
+
 api_key = st.secrets["api_key"]
 client = OpenAI(api_key=api_key)
 
@@ -28,3 +30,6 @@ def generate_image(prompt):
 
     with open("otter.png", 'wb') as file:
         file.write(image_response.content)
+
+        
+'''
